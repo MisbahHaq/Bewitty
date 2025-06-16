@@ -22,6 +22,7 @@ body {
     width: 350px;
     border-radius: 10px;
     background-color: white;
+    position: relative;
 }
 
 #container img {
@@ -29,4 +30,12 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: top;
+}
+
+#container i {
+    color: #fff;
+    font-size: 60px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
 }
