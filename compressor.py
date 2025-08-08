@@ -13,7 +13,7 @@ def compress_image(input_path, output_path=None, quality=70):
         img_format = img.format.upper()
 
         if output_path is None:
-            output_path = input_path  # overwrite original
+            output_path = input_path 
 
         if img_format in ["JPEG", "JPG", "WEBP"]:
             img.save(output_path, format=img_format, quality=quality, optimize=True)
@@ -35,11 +35,9 @@ def compress_webm(input_path, output_path=None, crf=28):
     """
     try:
         if output_path is None:
-            output_path = input_path  # overwrite original
+            output_path = input_path 
 
         temp_output = output_path + ".temp.webm"
-
-        # Run FFmpeg command
         subprocess.run([
             "ffmpeg", "-i", input_path,
             "-c:v", "libvpx-vp9",
@@ -49,7 +47,7 @@ def compress_webm(input_path, output_path=None, crf=28):
             temp_output
         ], check=True)
 
-        # Replace original with compressed
+    
         os.replace(temp_output, output_path)
         print(f"✅ Video compressed: {output_path}")
 
@@ -57,7 +55,7 @@ def compress_webm(input_path, output_path=None, crf=28):
         print(f"❌ Error compressing video {input_path}: {e}")
 
 if __name__ == "__main__":
-    folder_path = "images"  # Folder with images/videos
+    folder_path = "images" 
 
     for filename in os.listdir(folder_path):
         file_path = os.path.join(folder_path, filename)
