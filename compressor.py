@@ -4,40 +4,37 @@ import os
 def compress_image(input_path, output_path=None, quality=70):
     """
     Compresses an image without changing its extension.
-
-    Args:
-        input_path (str): Path to the input image.
-        output_path (str): Path to save compressed image (optional).
-                           If None, overwrites the original file.
-        quality (int): Compression quality (1-100 for JPEG/WebP).
+    JPG/WEBP - Uses quality compression
+    PNG - Reduces color palette + optimization
     """
     try:
-        # Open the image
         img = Image.open(input_path)
-        
-        # Get original extension and format
-        ext = os.path.splitext(input_path)[1].lower()
-        img_format = img.format
+        img_format = img.format.upper()
 
-        # Set output path
         if output_path is None:
-            output_path = input_path
+            output_path = input_path  # overwrite original
 
-        # Save compressed (JPEG/WebP get quality, PNG uses optimize)
+        # JPEG / WEBP compression
         if img_format in ["JPEG", "JPG", "WEBP"]:
             img.save(output_path, format=img_format, quality=quality, optimize=True)
+
+        # PNG compression (reduce colors + optimize)
         elif img_format == "PNG":
-            img.save(output_path, format=img_format, optimize=True)
+            img = img.convert("P", palette=Image.ADAPTIVE, colors=256)
+            img.save(output_path, format="PNG", optimize=True)
+
         else:
-            img.save(output_path, format=img_format)  # Other formats untouched
+            img.save(output_path, format=img_format)
 
         print(f"✅ Compressed: {output_path}")
+
     except Exception as e:
         print(f"❌ Error compressing {input_path}: {e}")
 
-# Example usage
+
 if __name__ == "__main__":
-    folder_path = "images"  # Change to your folder
+    folder_path = "images"  # Folder where images are stored
+
     for filename in os.listdir(folder_path):
         if filename.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
             file_path = os.path.join(folder_path, filename)
