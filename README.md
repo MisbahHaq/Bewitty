@@ -1,15 +1,21 @@
-Image & Video Compressor (Python + FFmpeg)
-A simple Python script to compress images and .webm videos without changing their file extensions.
+# Image & WebM Compressor
 
-Images → Compressed using Pillow.
+A simple Python script to compress images (`.png`, `.jpg`, `.jpeg`, `.webp`) and `.webm` videos without changing their original file extensions.  
+Uses **Pillow** for images and **FFmpeg** for videos.
 
-Videos → Compressed using FFmpeg with VP9 codec.
+## Features
 
-Supports .png, .jpg, .jpeg, .webp, and .webm.
+- Compresses `.png`, `.jpg`, `.jpeg`, `.webp` without changing extensions  
+- Optimizes PNG by reducing color palette  
+- Compresses `.webm` videos with quality settings  
+- Overwrites files in place or can be modified to save elsewhere  
+- Minimal and easy to use  
 
-Features
-Compresses JPEG & WEBP using adjustable quality
-Optimizes PNGs by reducing color palette (256 colors)
-Compresses WebM videos with FFmpeg & adjustable CRF
-Keeps original file extensions
-Option to overwrite originals or save in a new folder
+---
+
+## 🛠 Requirements
+
+- Python 3.x  
+- Pillow  
+```bash
+pip install pillow
